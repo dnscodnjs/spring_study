@@ -3,8 +3,12 @@ package hello.core.order;
 import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
+@RequiredArgsConstructor //final인 파라미터의 생성자 자동 설정
 public class OrderServiceImpl implements OrderService {
 
     //주문 생성 요청이 오면
@@ -32,11 +36,13 @@ public class OrderServiceImpl implements OrderService {
     }*/
 
     //아래와 같이 생성자가 1개인 경우(public OrderServiceImpl이 하나) 에는 @Autowired를 생략해도 자동 주입 * 스프링 빈에만 해당
-    //위에서 각자의 생성자를 생성해줌에 따라 아래 코드는 쓸모 없어짐
+    //@RequiredArgsConstructor이 final이 붙은 파라미터의 생성자를 만들어줘서 아래의 코드가 쓸모 없어짐
+/*
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
+*/
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
